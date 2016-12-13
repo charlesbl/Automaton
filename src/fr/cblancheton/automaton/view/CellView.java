@@ -2,6 +2,7 @@ package fr.cblancheton.automaton.view;
 
 import fr.cblancheton.automaton.model.Cell;
 import fr.cblancheton.automaton.model.State;
+import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -22,20 +23,24 @@ public class CellView extends Rectangle{
         this.setLayoutY(this.cell.getY() * CELL_SIZE);
 
         this.setOnMouseClicked(event -> {
-            if(this.cell.getState() == State.ALIVE)
-                this.cell.setState(State.DEAD);
-            else if(this.cell.getState() == State.DEAD || this.cell.getState() == State.INIT)
-                this.cell.setState(State.ALIVE);
+            if(event.getButton() == MouseButton.PRIMARY)
+                this.cell.setState(State.RED);
+            if(event.getButton() == MouseButton.MIDDLE)
+                this.cell.setState(State.GREEN);
+            if(event.getButton() == MouseButton.SECONDARY)
+                this.cell.setState(State.BLUE);
             this.update();
         });
     }
 
     public void update() {
-        if(this.cell.getState() == State.ALIVE)
+        if(this.cell.getState() == State.RED)
+            this.setFill(Color.RED);
+        else if(this.cell.getState() == State.GREEN)
+            this.setFill(Color.GREEN);
+        else if(this.cell.getState() == State.BLUE)
             this.setFill(Color.BLUE);
-        else if(this.cell.getState() == State.DEAD)
-            this.setFill(Color.GRAY);
         else
-            this.setFill(Color.BLACK);
+            this.setFill(Color.GRAY);
     }
 }

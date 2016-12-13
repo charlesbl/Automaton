@@ -15,8 +15,8 @@ public class Automaton {
     }
 
     public void nextGeneration(){
-        this.grid.getCells().stream().forEach(cell -> cell.processNewState());
-        this.grid.getCells().stream().forEach(cell -> {
+        this.grid.getCells().forEach(cell -> cell.processNewState());
+        this.grid.getCells().forEach(cell -> {
             try{
                 cell.nextGen();
             }catch (IllegalStateException e){

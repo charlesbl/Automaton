@@ -30,11 +30,14 @@ public class NextGenTask extends TimerTask {
         this.isRunning = !this.isRunning;
     }
 
+    public void process(){
+        this.automaton.nextGeneration();
+        this.automatonView.update();
+    }
     @Override
     public void run() {
         if(isRunning) {
-            this.automaton.nextGeneration();
-            this.automatonView.update();
+            this.process();
         }
     }
 }

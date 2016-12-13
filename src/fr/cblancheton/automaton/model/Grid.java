@@ -45,4 +45,8 @@ public class Grid {
                 cells.add(this.cells[i][j]);
         return cells;
     }
+
+    public int getCellsCount() {
+        return this.width * this.height;
+    }
 }

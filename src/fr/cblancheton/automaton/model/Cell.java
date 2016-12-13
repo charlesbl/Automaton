@@ -18,30 +18,54 @@ public class Cell {
         this.grid = grid;
         this.x = x;
         this.y = y;
-        this.state = State.INIT;
+        this.state = State.DEAD;
         this.newState = null;
     }
 
     public State processNewState(){
-        int aliveCount = 0;
+        this.newState = this.state;
+
+        int redCount = 0;
+        int greenount = 0;
+        int blueCount = 0;
+        int deadCount = 0;
 
         for(Cell cell : this.getHeigtCellsAround()){
-            if(cell.getState() == State.ALIVE)
-                aliveCount++;
+            if(cell.getState() == State.RED)
+                redCount++;
+            else if(cell.getState() == State.GREEN)
+                greenount++;
+            else if(cell.getState() == State.BLUE)
+                blueCount++;
+            else
+                deadCount++;
         }
 
-        if(aliveCount == 3 && (this.state == State.DEAD || this.state == State.INIT))
-            this.newState = State.ALIVE;
-        else if((aliveCount == 2 || aliveCount == 3) && this.state == State.ALIVE)
-            this.newState = State.ALIVE;
-        else if(this.state != State.INIT )
-            this.newState = State.DEAD;
-        else
-            this.newState = State.INIT;
+        if(this.state == State.RED){
+            if(greenount > 2)
+                this.newState = State.GREEN;
+        }
+        if(this.state == State.GREEN){
+            if(blueCount > 2)
+                this.newState = State.BLUE;
+        }
+        if(this.state == State.BLUE){
+            if(redCount > 2)
+                this.newState = State.RED;
+        }
+        if(this.state == State.DEAD){
+            if(deadCount < 6) {
+                if(redCount > greenount && redCount > blueCount)
+                    this.newState = State.RED;
+                if(greenount > redCount && greenount > blueCount)
+                    this.newState = State.GREEN;
+                if(blueCount > greenount && blueCount > redCount)
+                    this.newState = State.BLUE;
+            }
+        }
 
         return this.newState;
     }
-
     public State nextGen() throws IllegalStateException{
         if(this.newState == null)
             throw new IllegalStateException("New state not process");
