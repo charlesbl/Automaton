@@ -9,7 +9,7 @@ import java.util.TimerTask;
  * Created by charles on 12/11/16.
  */
 public class NextGenTask extends TimerTask {
-    public static final int FPS = 10;
+    public static final int FPS = 120;
 
     private final Automaton automaton;
     private final AutomatonView automatonView;
@@ -22,7 +22,7 @@ public class NextGenTask extends TimerTask {
         this.automaton = automaton;
         this.automatonView = automatonView;
         this.isRunning = false;
-        this.timer = new Timer(true);
+        this.timer = new Timer();
         this.timer.scheduleAtFixedRate(this, 0, 1000 / FPS);
     }
 
@@ -32,7 +32,7 @@ public class NextGenTask extends TimerTask {
 
     public void process(){
         this.automaton.nextGeneration();
-        this.automatonView.update();
+        //this.automatonView.update();
     }
     @Override
     public void run() {

@@ -4,7 +4,7 @@ package fr.cblancheton.automaton.model;
  * Created by charles on 12/10/16.
  */
 public class Automaton {
-    public static final int SIZE = 50;
+    public static final int SIZE = 100;
 
     private final Grid grid;
     private int numGen;

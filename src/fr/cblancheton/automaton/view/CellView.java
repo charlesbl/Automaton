@@ -10,7 +10,7 @@ import javafx.scene.shape.Rectangle;
  * Created by charles on 12/10/16.
  */
 public class CellView extends Rectangle{
-    public static final double CELL_SIZE = 12;
+    public static final double CELL_SIZE = 9;
 
     private final Cell cell;
 
@@ -37,7 +37,7 @@ public class CellView extends Rectangle{
         if(this.cell.getState() == State.RED)
             this.setFill(Color.RED);
         else if(this.cell.getState() == State.GREEN)
-            this.setFill(Color.GREEN);
+            this.setFill(Color.LIMEGREEN);
         else if(this.cell.getState() == State.BLUE)
             this.setFill(Color.BLUE);
         else
